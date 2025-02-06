@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/catalogo-lml-react/static/css/main.246ba42f.css",
+    "main.js": "/catalogo-lml-react/static/js/main.d337c398.js",
+    "static/js/488.e660e605.chunk.js": "/catalogo-lml-react/static/js/488.e660e605.chunk.js",
+    "index.html": "/catalogo-lml-react/index.html",
+    "main.246ba42f.css.map": "/catalogo-lml-react/static/css/main.246ba42f.css.map",
+    "main.d337c398.js.map": "/catalogo-lml-react/static/js/main.d337c398.js.map",
+    "488.e660e605.chunk.js.map": "/catalogo-lml-react/static/js/488.e660e605.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.246ba42f.css",
+    "static/js/main.d337c398.js"
+  ]
+}

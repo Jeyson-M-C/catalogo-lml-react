@@ -31,19 +31,29 @@ const CategoriasForm = () => {
     };
 
     return (
-        <div>
-            <h2>{categoriaEdit ? 'Editar Categoría' : 'Crear Categoría'}</h2>
-            <form onSubmit={handleSubmit}>
-                <label>Nombre:</label>
-                <input
-                    type="text"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                    required
-                />
-                <button type="submit">{categoriaEdit ? 'Actualizar' : 'Crear'}</button>
-            </form>
-        </div>
+        <div className="form">
+  <h2 className="form-heading">
+    {categoriaEdit ? 'Editar Categoría' : 'Crear Categoría'}
+  </h2>
+  <form onSubmit={handleSubmit} className="form">
+    <div className="form-field form-card1">
+    <label className="input-label">Nombre:</label>
+    <input
+    type="text"
+    value={nombre}
+    onChange={(e) => setNombre(e.target.value)}
+    required
+    className="input-field"
+    />
+    </div>
+
+    <div className="form-button-container">
+      <button type="submit" className="sendMessage-btn">
+        {categoriaEdit ? 'Actualizar' : 'Crear'}
+      </button>
+    </div>
+  </form>
+</div>
     );
 };
 

@@ -45,56 +45,72 @@ const EnlaceForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <h2>{enlaceEdit ? 'Editar Enlace' : 'Crear Enlace'}</h2>
+    <form onSubmit={handleSubmit} className="form">
+  <h2 className="form-heading">
+    {enlaceEdit ? 'Editar Enlace' : 'Crear Enlace'}
+  </h2>
 
-      <label>
-        Título:
-        <input
-          type="text"
-          value={titulo}
-          onChange={(e) => setTitulo(e.target.value)}
-          required
-        />
-      </label>
+  <div className="form-field form-card1">
+    <label className="input-label">
+      Título:
+      <input
+        type="text"
+        value={titulo}
+        onChange={(e) => setTitulo(e.target.value)}
+        required
+        className="input-field"
+      />
+    </label>
+  </div>
 
-      <label>
-        URL:
-        <input
-          type="text"
-          value={url}
-          onChange={(e) => setUrl(e.target.value)}
-          required
-        />
-      </label>
+  <div className="form-field form-card1">
+    <label className="input-label">
+      URL:
+      <input
+        type="text"
+        value={url}
+        onChange={(e) => setUrl(e.target.value)}
+        required
+        className="input-field"
+      />
+    </label>
+  </div>
 
-      <label>
-        Descripción:
-        <textarea
-          value={descripcion}
-          onChange={(e) => setDescripcion(e.target.value)}
-          required
-        />
-      </label>
+  <div className="form-field form-card1">
+    <label className="input-label">
+      Descripción:
+      <textarea
+        value={descripcion}
+        onChange={(e) => setDescripcion(e.target.value)}
+        required
+        className="input-field"
+      />
+    </label>
+  </div>
 
-      <label>
-        Categoría:
-        <select
-          value={categoriaId}
-          onChange={(e) => setCategoriaId(e.target.value)}
-          required
-        >
-          <option value="">Selecciona una categoría</option>
-          {categorias.map((cat) => (
-            <option key={cat._id} value={cat._id}>
-              {cat.nombre}
-            </option>
-          ))}
-        </select>
-      </label>
+  <div className="form-field form-card1">
+    <label className="input-label">
+      Categoría:
+      <select
+        value={categoriaId}
+        onChange={(e) => setCategoriaId(e.target.value)}
+        required
+        className="input-field"
+      >
+        <option value="">Selecciona una categoría</option>
+        {categorias.map((cat) => (
+          <option key={cat._id} value={cat._id}>
+            {cat.nombre}
+          </option>
+        ))}
+      </select>
+    </label>
+  </div>
 
-      <button type="submit">{enlaceEdit ? 'Actualizar Enlace' : 'Crear Enlace'}</button>
-    </form>
+  <button type="submit" className="sendMessage-btn">
+    {enlaceEdit ? 'Actualizar Enlace' : 'Crear Enlace'}
+  </button>
+</form>
   );
 };
 

@@ -26,39 +26,31 @@ const Login = () => {
     };
 
     return (
-        <form onSubmit={handleSubmit}>
-            <div>
-                <label className="form-label mt-4">Iniciar sesión</label>
-                <div className="form-floating mb-3">
-                  <input 
-                      type="username" 
-                      class="form-control" 
-                      id="floatingInput" 
-                      placeholder="Usuario"
-                      value={username}
-                      onChange={(e) => setUsername(e.target.value)} 
-                  />
-                  <label for="floatingInput">Usuario</label>
-                </div>
-                <div className="form-floating">
-                  <input 
-                      type="password" 
-                      class="form-control" 
-                      id="floatingPassword" 
-                      placeholder="Contraseña" 
-                      autocomplete="off"
-                      value={password} 
-                      onChange={(e) => setPassword(e.target.value)} 
-                  />
-                  <label for="floatingPassword">Contraseña</label>
-                </div>
-                <div>
-                <button type="submit" class="btn btn-outline-success">Ingresar</button>
-                </div>
-
-            </div>
-        </form>
-    );
+        <div className="container-login">
+      <form className="form-login" onSubmit={handleSubmit}>
+        <p className="title-login">Acceso</p>
+        <input
+          placeholder="Usuario"
+          className="username input-login"
+          type="text"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <input
+          placeholder="Contraseña"
+          className="password input-login"
+          type="password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          required
+        />
+        <button className="btn-login" type="submit">
+          Ingresar
+        </button>
+      </form>
+    </div>
+  );
 };
 
 export default Login;

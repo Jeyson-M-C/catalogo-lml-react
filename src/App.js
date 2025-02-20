@@ -7,7 +7,6 @@ import EnlaceForm from './components/Enlaces/EnlaceForm';
 import CategoriaForm from './components/Categorias/CategoriaForm'
 import EnlacesPorCategoria from './components/Enlaces/EnlacesPorCategoria';
 import Home from './pages/Home';
-import NotFound from './pages/NotFound';
 import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 
@@ -23,7 +22,7 @@ const App = () => (
         <Route path="/enlaces-form" element={<EnlaceForm />} />
         <Route path="/categorias-form" element={<CategoriaForm />} />
         <Route path="/enlaces/:categoriaId" element={<EnlacesPorCategoria />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<Home />} />
       </Routes>
     </Router>
   </AuthProvider>

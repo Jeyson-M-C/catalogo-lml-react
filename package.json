@@ -21,7 +21,7 @@
   "bugs": {
     "url": "https://github.com/Jeyson-M-C/catalogo-lml-react/issues"
   },
-  "homepage":"https://Jeyson-M-C.github.io/catalogo-lml-react",
+  "homepage": "https://Jeyson-M-C.github.io/catalogo-lml-react",
   "dependencies": {
     "axios": "^1.7.9",
     "react-dom": "^19.0.0",
@@ -42,6 +42,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "gh-pages": "^6.3.0"
   }
 }

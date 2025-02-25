@@ -116,6 +116,9 @@ const Home = () => {
         </div>
       </div>
     </div>
+    <footer className="footer">
+      catalogo lml © {new Date().getFullYear()}
+    </footer>
     </div>
   );
 };

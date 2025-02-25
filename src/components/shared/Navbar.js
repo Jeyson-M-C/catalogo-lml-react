@@ -98,6 +98,9 @@ const Navbar = () => {
                         <Link to="/enlaces-form">
                             <button className="btn-nav">Crear Enlace</button>
                         </Link>
+                        <button className="btn-nav" onClick={logout}>
+                            <i className="fas fa-sign-out-alt"></i> Cerrar Sesión
+                        </button>
                     </>
                     )}
 

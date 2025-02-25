@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { fetchNoticias } from "../services/api";
 
 const Home = () => {
   const [noticias, setNoticias] = useState([]); // Estado para almacenar las noticias
@@ -7,42 +8,20 @@ const Home = () => {
   const [loading, setLoading] = useState(true); // Estado para manejar el estado de carga
 
   useEffect(() => {
-    const api_key = process.env.REACT_APP_NEWS_API_KEY;
-
-    if (!api_key) {
-      setError("API Key no está definida. Por favor, configura la clave API.");
-      setLoading(false);
-      return;
-    }
-
-    const url = "https://newsapi.org/v2/everything";
-
-    const fetchNoticias = async () => {
+    const fetchNoticiasData = async () => {
       try {
-        const response = await fetch(
-          `${url}?q=tecnología&language=es&apiKey=${api_key}`
-        );
-
-        if (response.ok) {
-          const data = await response.json();
-          const sortedNoticias = data.articles.sort(
-            (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
-          );
-          setNoticias(sortedNoticias); // Guardar las noticias ordenadas en el estado
-        } else {
-          setError("Error al obtener noticias. Código: " + response.status);
-        }
+        const noticiasData = await fetchNoticias();
+        setNoticias(noticiasData); // Guardar las noticias ordenadas en el estado
       } catch (error) {
-        console.error("Error al obtener noticias:", error);
         setError("Error al obtener noticias");
       } finally {
         setLoading(false);
       }
     };
-
-    fetchNoticias();
+  
+    fetchNoticiasData();
   }, []); // El array vacío asegura que la solicitud se haga solo una vez al montar el componente
-
+  
   return (
     <div className="container-xl">
     <div className="notification">

@@ -8,6 +8,26 @@ export const loginUser = async (username, password) => {
   return response.data;
 };
 
+export const fetchNoticias = async (q = "tecnología", language = "es") => {
+  try {
+    const response = await fetch(`${API_URL}/noticias?q=${q}&language=${language}`);
+    if (response.ok) {
+      const data = await response.json();
+      const sortedNoticias = data.articles.sort(
+        (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt)
+      );
+      return sortedNoticias; // Devuelve las noticias ordenadas
+    } else {
+      throw new Error(`Error al obtener noticias. Código: ${response.status}`);
+    }
+  } catch (error) {
+    console.error("Error al obtener noticias:", error);
+    throw error;
+  }
+};
+
+
+
 export const fetchCategorias = async () => {
   const response = await axios.get(`${API_URL}/categorias/`);
   return response.data;

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { fetchCategorias } from '../../services/api';
-import { useAuth } from '../../context/AuthContext';
+import { fetchCategorias } from '../../services/api'; // Suponiendo que esta función obtiene las categorías
+import { useAuth } from '../../context/AuthContext'; // Contexto de autenticación
 
 const Categorias = () => {
     const [categorias, setCategorias] = useState([]);
@@ -9,79 +9,80 @@ const Categorias = () => {
     const [isLoading, setIsLoading] = useState(true);
     const navigate = useNavigate();
 
+    // Cargar categorías
     useEffect(() => {
-        const isFirstLoad = localStorage.getItem('isFirstLoad'); // Verifica si ya se cargó antes
+        const isFirstLoad = localStorage.getItem('isFirstLoad'); // Para verificar si es la primera carga
 
         if (!isFirstLoad) {
-            // Primera carga: muestra el loader durante 3.5 segundos
             setTimeout(() => {
                 fetchCategorias().then((data) => {
                     setCategorias(data);
-                    setIsLoading(false); // Oculta el loader después de cargar los datos
-                    localStorage.setItem('isFirstLoad', 'true'); // Marca que ya se cargó
+                    setIsLoading(false); // Ocultar el loader cuando la carga termina
+                    localStorage.setItem('isFirstLoad', 'true'); // Marcar como cargada
                 });
             }, 3300);
         } else {
-            // No es la primera carga: carga los datos directamente
+            // Si ya fue cargado previamente, solo mostramos las categorías
             fetchCategorias().then((data) => {
                 setCategorias(data);
-                setIsLoading(false); // Oculta el loader cuando los datos estén listos
+                setIsLoading(false);
             });
         }
     }, []);
 
     if (isLoading) {
         return (
+            <div className="container-xl">
             <div className="loader mt-5">
-                <div className="tars">
-                    <div className="container 1">
-                        <div className="shape">
-                            <div className="f"></div>
-                            <div className="b"></div>
-                            <div className="l"></div>
-                            <div className="r"></div>
-                            <div className="t"></div>
-                            <div className="bot"></div>
-                        </div>
-                    </div>
-                    <div className="container 2">
-                        <div className="shape">
-                            <div className="f"></div>
-                            <div className="b"></div>
-                            <div className="l"></div>
-                            <div className="r"></div>
-                            <div className="t"></div>
-                            <div className="bot"></div>
-                        </div>
-                    </div>
-                    <div className="container 3">
-                        <div className="shape">
-                            <div className="f"></div>
-                            <div className="b"></div>
-                            <div className="l"></div>
-                            <div className="r"></div>
-                            <div className="t"></div>
-                            <div className="bot"></div>
-                        </div>
-                    </div>
-                    <div className="container 4">
-                        <div className="shape">
-                            <div className="f"></div>
-                            <div className="b"></div>
-                            <div className="l"></div>
-                            <div className="r"></div>
-                            <div className="t"></div>
-                            <div className="bot"></div>
-                        </div>
+            <div className="tars">
+                <div className="container-loader 1">
+                    <div className="shape">
+                        <div className="f"></div>
+                        <div className="b"></div>
+                        <div className="l"></div>
+                        <div className="r"></div>
+                        <div className="t"></div>
+                        <div className="bot"></div>
                     </div>
                 </div>
+                <div className="container-loader 2">
+                    <div className="shape">
+                        <div className="f"></div>
+                        <div className="b"></div>
+                        <div className="l"></div>
+                        <div className="r"></div>
+                        <div className="t"></div>
+                        <div className="bot"></div>
+                    </div>
+                </div>
+                <div className="container-loader 3">
+                    <div className="shape">
+                        <div className="f"></div>
+                        <div className="b"></div>
+                        <div className="l"></div>
+                        <div className="r"></div>
+                        <div className="t"></div>
+                        <div className="bot"></div>
+                    </div>
+                </div>
+                <div className="container-loader 4">
+                    <div className="shape">
+                        <div className="f"></div>
+                        <div className="b"></div>
+                        <div className="l"></div>
+                        <div className="r"></div>
+                        <div className="t"></div>
+                        <div className="bot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
             </div>
         );
     }
 
-
     return (
-        <div className="container-xl">
+        <div className="container-xl ">
             <h2>Categorías</h2>
 
             {isAuthenticated && (
@@ -91,16 +92,27 @@ const Categorias = () => {
             <div className="cards-container">
                 {categorias.map((cat) => (
                     <div className="card" key={cat._id}>
-                    <div className="heading">
-                        <span>{cat.nombre}</span> {/* Nombre de la categoría */}
-                    </div>
+                        <div className="heading">
+                            <span>{cat.nombre}</span> {/* Nombre de la categoría */}
+                        </div>
                         <div className="div-container-cats">
                             {isAuthenticated && (
-                                <button className="learn-more" onClick={() => navigate('/categorias-form', { state: { categoriaEdit: cat } })}>
+                                <button
+                                    className="learn-more"
+                                    onClick={() =>
+                                        navigate('/categorias-form', { state: { categoriaEdit: cat } })
+                                    }
+                                >
                                     Editar
                                 </button>
+                                
                             )}
-                            <button className="btn" onClick={() => navigate(`/enlaces/${cat._id}`, { state: { categoria: cat } })}>
+                            <button
+                                className="btn"
+                                onClick={() =>
+                                    navigate(`/enlaces/${cat._id}`, { state: { categoria: cat } })
+                                }
+                            >
                                 Ver Enlaces
                             </button>
                         </div>

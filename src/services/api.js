@@ -1,10 +1,10 @@
 import axios from 'axios';
 
 
-const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_URL = /* process.env.REACT_APP_API_URL ||*/ 'http://localhost:8000';
 
 export const loginUser = async (username, password) => {
-  const response = await axios.post(`${API_URL}/login`, { username, password });
+  const response = await axios.post(`${API_URL}/usuarios/login`, { username, password });
   return response.data;
 };
 
@@ -40,6 +40,16 @@ export const actualizarCategoria = async (categoriaId, data) => {
   return await response.json();
 };
 
+export const eliminarCategoria = async (categoriaId) => {
+  try {
+      const response = await axios.delete(`${API_URL}/categorias/${categoriaId}`);
+      return response.data;
+  } catch (error) {
+      console.error("Error al eliminar la categoría:", error);
+      throw error; // Re-lanza el error para que el componente lo maneje
+  }
+};
+
 
 export const crearEnlace = async (enlace) => {
   const response = await axios.post(`${API_URL}/enlaces/`, enlace);
@@ -54,9 +64,9 @@ export const actualizarEnlace = async (id, enlaceData) => {
 
 export const fetchEnlacesPorCategoria = async (categoriaId) => {
   try {
-      const response = await fetch(`${API_URL}/enlaces-por-categoria/${categoriaId}`);
+      const response = await fetch(`${API_URL}/enlaces/enlaces-por-categoria/${categoriaId}`);
       if (!response.ok) {
-          throw new Error("No se pudieron obtener los enlaces.");
+          throw new Error(`No se pudieron obtener los enlaces. Código de estado: ${response.status}`);
       }
       return await response.json();
   } catch (error) {
@@ -64,5 +74,36 @@ export const fetchEnlacesPorCategoria = async (categoriaId) => {
       return { enlaces: [] };
   }
 };
+
+
+
+// Crear un subenlace
+export const crearSubenlace = async (subenlace) => {
+  const response = await axios.post(`${API_URL}/subenlaces/`, subenlace);
+  return response.data;
+};
+
+// Obtener subenlaces por enlace
+export const fetchSubenlacesPorEnlace = async (id) => {
+  try {
+      const response = await fetch(`${API_URL}/subenlaces/${id}`);
+      if (!response.ok) {
+          throw new Error("No se pudieron obtener los subelaces.");
+      }
+      return await response.json();
+  } catch (error) {
+      console.error("Error al obtener subelaces:", error);
+      return { message: "Error al cargar datos." };
+  }
+};
+
+// Actualizar un subenlace
+export const actualizarSubenlace = async (subenlaceId, subenlaceData) => {
+  const response = await axios.put(`${API_URL}/subenlaces/${subenlaceId}`, subenlaceData);
+  return response.data;
+};
+
+
+
 
 

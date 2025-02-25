@@ -13,7 +13,7 @@ const Login = () => {
         e.preventDefault();
         try {
             const data = await loginUser(username, password);
-            if (data.is_admin || data.is_default_admin) {
+            if (data['is-admin']) {
                 login(); // Actualiza el estado de autenticación y establece el temporizador
                 alert('Inicio de sesión exitoso');
                 navigate('/'); // Redirige a la página de inicio
@@ -21,11 +21,19 @@ const Login = () => {
                 alert('No tienes permisos para acceder');
             }
         } catch (error) {
-            alert('Error al iniciar sesión usuario o contraseña erronea');
-        }
+          if(error.response && error.response.status === 401){
+            alert('Credenciales inválidas');
+          } else if(error.response && error.response.status === 405){
+            console.log("Error Method Not Allowed");
+            alert('Método no permitido');
+          } else {
+            alert('Error al iniciar sesión: ' + error.message);
+        }        
+      }
     };
 
     return (
+      <div className="container-xl">
         <div className="container-login">
       <form className="form-login" onSubmit={handleSubmit}>
         <p className="title-login">Acceso</p>
@@ -49,7 +57,8 @@ const Login = () => {
           Ingresar
         </button>
       </form>
-    </div>
+        </div>
+      </div>
   );
 };
 

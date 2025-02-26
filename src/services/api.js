@@ -10,7 +10,7 @@ export const loginUser = async (username, password) => {
 
 export const fetchNoticias = async (q = "tecnología", language = "es") => {
   try {
-    const response = await fetch(`${API_URL}/noticias?q=${q}&language=${language}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`);
+    const response = await fetch(`${API_URL}/noticias?q=${q}&language=${language}`);
     if (response.ok) {
       const data = await response.json();
       const sortedNoticias = data.articles.sort(
